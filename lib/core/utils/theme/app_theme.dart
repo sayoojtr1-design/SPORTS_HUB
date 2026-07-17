@@ -27,17 +27,17 @@ class AppTheme {
       headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
-        color: AppColors.white,
+        color: Colors.black,
       ),
       bodyLarge: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w500,
-        color: AppColors.white,
+        color: Colors.black,
       ),
 
       bodyMedium: TextStyle(
         fontSize: 16,
-        color: AppColors.white,
+        color: Colors.black
       ),
 
     ),
@@ -57,7 +57,7 @@ class AppTheme {
 
     ),
     cardColor: AppColors.darkCard,
-    colorScheme: const ColorScheme.light(
+    colorScheme: const ColorScheme.dark(
         primary: AppColors.white,
         secondary: AppColors.greenAccent,
         surface: AppColors.white
