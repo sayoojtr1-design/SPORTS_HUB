@@ -1,9 +1,6 @@
-import 'package:e_store/core/common/widgets/custom_button.dart';
+
 import 'package:e_store/core/common/widgets/loading_dialog.dart';
 import 'package:e_store/core/common/widgets/toast_helper.dart';
-import 'package:e_store/features/authentication/view/home_screen.dart';
-import 'package:e_store/features/authentication/view/sign_up_screen.dart';
-import 'package:e_store/features/authentication/view/widgets/custom_text_field.dart';
 import 'package:e_store/features/authentication/view_model/auth_view_model.dart';
 import 'package:e_store/root_screen.dart';
 import 'package:flutter/material.dart';
@@ -50,41 +47,171 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          spacing: 20,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomTextField(
-              ctr: emailCtr,
-              hintText: "Enter Email",
-              icon: Icons.email,
-              obscure: false,
-            ),
-            CustomTextField(
-              ctr: passCtr,
-              hintText: "Enter password",
-              icon: Icons.password,
-              obscure: false,
-            ),
-            CustomButton(text: "Login", onTap: login),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: SingleChildScrollView(
+            child: Column(
               children: [
-                Text("Don't Have an account ?"),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignUpScreen()),
-                    );
-                  },
-                  child: Text("Sign Up"),
+                const SizedBox(height: 40),
+
+                Container(
+                  width: 90,
+                  height: 90,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(
+                      colors: [
+                        Colors.lightGreenAccent,
+                        Colors.green.shade900,
+                      ],
+                    ),
+                  ),
                 ),
+
+                const SizedBox(height: 25),
+
+                const Text(
+                  "Welcome Back!",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                Text(
+                  "Sign in to continue",
+                  style: TextStyle(color: Colors.grey.shade400),
+                ),
+
+                const SizedBox(height: 35),
+
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Email",
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    suffixIcon: Icon(Icons.visibility),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+
+                Row(
+                  children: [
+                    Checkbox(value: false, onChanged: (_) {}),
+                    const Text(
+                      "Remember me",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Spacer(),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text("Forgot Password"),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 20),
+
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.limeAccent,
+                      foregroundColor: Colors.black,
+                    ),
+                    onPressed: login,
+                    child: const Text("login"),
+                  ),
+                ),
+
+                const SizedBox(height: 30),
+
+                Row(
+                  children: [
+                    Expanded(child: Divider(color: Colors.grey)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        "OR",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Expanded(child: Divider(color: Colors.grey)),
+                  ],
+                ),
+
+                const SizedBox(height: 20),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: () {},
+                        icon: Icon(Icons.g_mobiledata),
+                        label: Text("Google"),
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: () {},
+                        icon: Icon(Icons.apple),
+                        label: Text("Apple"),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 35),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account?",
+                      style: TextStyle(color: Colors.white70),
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (_) => LoginScreen(),
+
+                      ),
+                    );
+                      },
+                      child: const Text("Login",
+                      style:TextStyle(
+                        color: Color(0xffF58A42),
+                        fontWeight: FontWeight.bold,
+                      )
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

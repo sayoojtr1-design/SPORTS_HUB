@@ -5,6 +5,7 @@ import 'package:e_store/features/orders/view_model/checkout_View_model.dart';
 import 'package:e_store/features/orders/view_model/order_view_model.dart';
 import 'package:e_store/features/settings/view_model/address_view_model.dart';
 import 'package:e_store/features/shop/view_model/product_view_model.dart';
+import 'package:e_store/features/wishlist/view_model/wish_list_view_model.dart';
 import 'package:e_store/providers/obscure_provider.dart';
 import 'package:e_store/providers/theme_provider.dart';
 import 'package:e_store/root_screen.dart';
@@ -32,6 +33,11 @@ void main() async{
         ChangeNotifierProvider(create: ((context) => CartViewModel())),
         ChangeNotifierProvider(create: ((context) => CheckoutViewModel())),
         ChangeNotifierProvider(create: ((context) => OrderViewModel())),
+        ChangeNotifierProvider(create: (context){
+          final  provider = WishListViewModel();
+          provider.loadWishList();
+          return provider;
+  }),
 
 
       ],

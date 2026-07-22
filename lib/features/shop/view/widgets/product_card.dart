@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_store/features/wishlist/view/widget/wish_list_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/product_model.dart';
@@ -33,30 +34,45 @@ class ProductCard extends StatelessWidget {
             children: [
 
               Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: CachedNetworkImage(
-                    imageUrl: product.images?.isNotEmpty == true
-                        ? product.images!.first
-                        : "",
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: CachedNetworkImage(
+                        imageUrl: product.images?.isNotEmpty == true
+                            ? product.images!.first
+                            : "",
+                        width: double.infinity,
+                        fit: BoxFit.cover,
 
-                    placeholder: (context, url) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
+                        placeholder: (context, url) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
 
-                    errorWidget: (context, url, error) {
-                      return const Center(
-                        child: Icon(
-                          Icons.image_not_supported_outlined,
-                          size: 40,
+                        errorWidget: (context, url, error) {
+                          return const Center(
+                            child: Icon(
+                              Icons.image_not_supported_outlined,
+                              size: 40,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle
                         ),
-                      );
-                    },
-                  ),
+                        child: WishListButton(product: product),
+                      ),
+                    )
+                  ],
                 ),
               ),
 

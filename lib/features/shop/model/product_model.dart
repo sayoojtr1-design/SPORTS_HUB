@@ -1,5 +1,3 @@
-
-
 class ProductModel {
   int? id;
   String? title;
@@ -61,6 +59,43 @@ class ProductModel {
 
     return data;
   }
+  //fire base operations
+// to convert to firebase object
+
+  Map<String,dynamic>toMap(){
+    return {
+      'id':id,
+      'title':title,
+      'slug':slug,
+      'price':price,
+      'description':description,
+      'category':category?.toMap(),
+      'images':images,
+      'creationAt':creationAt,
+      'updateAt':updatedAt,
+
+
+    };
+  }
+  factory ProductModel.fromMap(Map<String,dynamic>map){
+    return ProductModel(
+        id: map['id'],
+        title: map['title'],
+        slug: map['slug'],
+        price: map['price'],
+        description:map['description'],
+        category: map['category'] !=null
+            ? ProductCategory.fromMap(
+            Map<String,dynamic>.from(map['category'])
+        )
+            :null,
+        images: map['images']!=null
+            ?List<String>.from(map['images']):[],
+        creationAt: map['creationAt'],
+        updatedAt: map['updateAt']
+    );
+  }
+
 }
 
 class ProductCategory {
@@ -100,5 +135,28 @@ class ProductCategory {
     data['updatedAt'] = updatedAt;
 
     return data;
+  }
+  Map<String,dynamic>toMap(){
+    return{
+
+      'id':id,
+      'name':name,
+      'slug':slug,
+      'image':image,
+      'creationAt':creationAt,
+      'updateAt':updatedAt,
+
+
+    };
+  }
+  factory ProductCategory.fromMap(Map<String,dynamic>map){
+    return ProductCategory(
+        id: map['id'],
+        name:map['name'],
+        slug: map['slug'],
+        image: map['image'],
+        creationAt:map['creationAt'],
+        updatedAt: map['updateAt']
+    );
   }
 }
